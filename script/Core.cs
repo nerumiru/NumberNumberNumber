@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using System.Numerics;
 public class Core : MonoBehaviour {
     private const string SNscore = "number";
-    private const string SNlifetime = "lifetime";
     public Text txt;
     float timeChecker;
     bool running = true;
@@ -32,7 +31,6 @@ public class Core : MonoBehaviour {
         sb = new StringBuilder();
         StartCoroutine(SaveCoroutine());
         StartCoroutine(ScoreCoroutine());
-        //NumberManager.Instance.Increase("-123456789");
 
 
     }
@@ -43,6 +41,7 @@ public class Core : MonoBehaviour {
         Debug.Log("score :  " + NumberManager.Instance.Read() + "\n" + NumberManager.Instance.ReadWithUnit());
         txt.text = NumberManager.Instance.Read() + "점" ;
     }
+    //5.1초마다 플레이 타임을 기록과 저장을 하는 코루틴
     IEnumerator SaveCoroutine()
     {
         while (running)
@@ -52,6 +51,8 @@ public class Core : MonoBehaviour {
             SaveManger.Instance.Save();
         }
     }
+
+    //1초마다 숫자를 1씩올리는 코루틴
     IEnumerator ScoreCoroutine()
     {
         while (running)
